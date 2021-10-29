@@ -15,4 +15,8 @@
 </script>
 
 <style>
+	.content {
+		font-size: 20px;
+		text-align: center;
+	}
 </style>

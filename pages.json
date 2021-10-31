@@ -27,6 +27,13 @@
 			"navigationBarTitleText": "聊天内容"
 		}
 
+	}, {
+		"path": "pages/info/info",
+		"style": {
+			"navigationBarTitleText": "",
+			"enablePullDownRefresh": false
+		}
+
 	}],
 	"tabBar": {
 		"color": "#7a7e83",
@@ -35,7 +42,7 @@
 		"borderStyle": "white",
 		"list": [{
 				"pagePath": "pages/index/index",
-				"text": "消息",
+				"text": "新闻列表",
 				"iconPath": "static/api.png",
 				"selectedIconPath": "static/apiHL.png"
 			},
@@ -64,5 +71,13 @@
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#efefef"
+	},
+	"condition": {
+		"current": 0,
+		"list": [{
+			"name": "me",
+			"path": "pages/info/info",
+			"query": "newsid=5310813"
+		}]
 	}
 }

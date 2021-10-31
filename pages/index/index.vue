@@ -1,10 +1,17 @@
 <template>
-	<view class="container">
-		<view class="content">{{msg}}</view>
-
-		<navigator url="/pages/find/find" open-type="switchTab">
-			<button type="primary">Click</button>
-		</navigator>
+	<view class="content">
+		<view class="uni-list">
+			<view class="uni-list-cell" hover-class="uni-list-cell-hover" v-for="(item,index) in news" :key="index"
+				@tap="openinfo" :data-newsid="item.post_id">
+				<view class="uni-media-list">
+					<image class="uni-media-list-logo" :src="item.author_avatar"></image>
+					<view class="uni-media-list-body">
+						<view class="uni-media-list-text-top">{{item.title}}</view>
+						<view class="uni-media-list-text-bottom uni-ellipsis">{{item.created_at}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -12,15 +19,44 @@
 	export default {
 		data() {
 			return {
-				msg: "Hello 微信"
+				news: []
+			}
+		},
+		onLoad: function() {
+			uni.showLoading({
+				title: '加载中...'
+			});
+			
+			uni.request({
+				url: 'https://unidemo.dcloud.net.cn/api/news',
+				method: 'GET',
+				data: {},
+				success: res => {
+					console.log(res);
+					this.news = res.data;
+					uni.hideLoading();
+				},
+				fail: () => {},
+				complete: () => {}
+			});
+		},
+		methods: {
+			openinfo(e) {
+				var newsid = e.currentTarget.dataset.newsid;
+				uni.navigateTo({
+					url: '../info/info?newsid=' + newsid
+				});
 			}
 		}
 	}
 </script>
 
 <style>
-	.content {
-		font-size: 20px;
-		text-align: center;
+	.uni-media-list-body {
+		height: auto;
+	}
+
+	.uni-media-list-text-top {
+		line-height: 1.6em;
 	}
 </style>
